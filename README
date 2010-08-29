@@ -20,6 +20,13 @@ in the Flex app. Python and Flash being cross-platform, it should be possible
 to make this work on Windows. (Perhaps even writing a virus to install
 the client scripts...)
 
+I am using Python 2.6, though support for 2.5 could probably be trivially
+added. Let me know if you're having problems.
+
+Python modules you may need to install:
+sqlite3
+flask ( http://flask.pocoo.org/ )
+
 ------------
 INSTALLATION
 ------------
