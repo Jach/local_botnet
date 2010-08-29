@@ -1,0 +1,10 @@
+
+------------
+INSTALLATION
+------------
+
+First, you need to create the database. Start up a Python interactive shell,
+and enter:
+
+>>> from main import init_db
+>>> init_db()
