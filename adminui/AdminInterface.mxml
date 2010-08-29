@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               width="100%"
+               height="100%"
+               >
+
+  <fx:Declarations>
+    <!--<s:HTTPService id="getEmployeesService" url="http://localhost:8888/flex4ch08/getEmployees.php" 
+					   method="GET" resultFormat="e4x" 
+					   result="getEmployeesResult(event)" fault="serviceFault(event)" />
+    -->
+  </fx:Declarations>
+  <s:RichText x="100" y="100" text="This is the Admin UI" />
+
+</s:Application>

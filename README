@@ -1,10 +1,59 @@
+This application is a pseudo-botnet. The original goal of this software
+was to provide a light server to run in a networked classroom which
+the networked machines will connect with using root-level background processes.
+(The necessary daemon(s) and other scripts are in the client_scripts/
+directory.) These processes will query the views in views/client.py to
+receive instructions, for example a command to lock the screen or
+download a file to a certain location on the machine.
+
+For the teacher or admin, there is a flex interface for controlling the
+"bots"/clients. This is accessed using a regular browser, and is protected
+with a simple login.
+
+------------
+REQUIREMENTS
+------------
+
+This suite is made for use with a *Nix operator system, though really the
+only *Nix specific pieces are the client_scripts/ and the built-in commands
+in the Flex app. Python and Flash being cross-platform, it should be possible
+to make this work on Windows. (Perhaps even writing a virus to install
+the client scripts...)
 
 ------------
 INSTALLATION
 ------------
 
-First, you need to create the database. Start up a Python interactive shell,
-and enter:
+On the server machine:
 
->>> from main import init_db
->>> init_db()
+Simply run './server_app.py' and you'll have an instance of this app running
+on localhost:5000. The first time you run it the database will automatically
+be setup. If you wish to deploy using a different server such as Apache,
+see the documentation here: http://flask.pocoo.org/docs/deploying/
+I recommend mod_wsgi or FastCGI.
+
+On the client machine:
+
+As root, you'll need to copy the files in client_scripts/ to a secure location
+(typically /etc/init.d/) on every client machine, then add these to the
+default runlevel using whatever rc-update scripts your flavor of Linux has
+so they can be started on machine boot.
+
+-------------
+CUSTOMIZATION
+-------------
+
+The Flex app's source code is in adminui/ which also contains a build.xml file
+for use with ant, if you have the Flex 4 SDK installed. The app will build
+and deploy to static/. For security purposes, you should delete the
+generated .swf.cache file if deploying live or else omit the
+-compiler.incremental flag from build.xml.
+
+The Flask micro-framework for Python makes adding new functionality quite
+easy, check out the views/ directory. admin.py is meant for REST-ful
+queries between the server and the flex app, while client.py is meant for
+wget's (or other requests) from the client scripts. Various configuration
+options are in app/config.py
+
+The client scripts themselves may be normal shell scripts or possibly in
+the future Python or Perl scripts.
