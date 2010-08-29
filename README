@@ -64,3 +64,36 @@ options are in app/config.py
 
 The client scripts themselves may be normal shell scripts or possibly in
 the future Python or Perl scripts.
+
+-------
+LICENSE
+-------
+
+This project is licensed under the GNU Affero GPL version 3 or greater. What
+this means is that you will need to include a link to your source code
+to any web users, not just people you distribute the code to. (A link to this
+repository is satisfactory unless you make big changes, and will be in the Flex
+app.) If you find this to be too much of an inconvenience, contact me and
+I'd be happy to grant you an MIT License exception. I just like the GPL
+for larger projects. Obviously consider (and I claim) config.py, schema.sql,
+anything in static/ and templates/ excepting AdminInterface.swf, and
+adminui/build.xml to be in the public domain, and any third party libraries
+to be covered by their respective licenses.
+
+Obligatory copyright notice:
+
+Copyright 2010 Kevin Secretan
+
+local_botnet is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+local_botnet is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with local_botnet.  If not, see <http://www.gnu.org/licenses/>.
+
