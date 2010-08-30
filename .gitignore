@@ -1,3 +1,7 @@
 *.pyc
 *.swp
 *.cache
+.*Properties
+.settings
+.project
+bin-debug

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+               xmlns:s="library://ns.adobe.com/flex/spark" 
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               width="200" height="200"
+               keyUp="keyHandler(event);"
+               title="Login"
+               close="closeWin(event);"
+               creationComplete="init();"
+               >
+  <s:layout>
+    <s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+  </s:layout>
+  <fx:Declarations>
+    <s:HTTPService id="loginService" url="{mod.base_url}/login/" method="POST" resultFormat="text"
+                   result="getLoginResult(event);"
+                   fault="mod.serviceFault(event);"
+                   showBusyCursor="true"
+                   >
+      <s:request><username>{username.text}</username><password>{password.text}</password></s:request>
+    </s:HTTPService>
+  </fx:Declarations>
+  
+  <s:Label text="Username" />
+  <s:TextInput id="username" />
+  <s:Label text="Password" />
+  <s:TextInput id="password" displayAsPassword="true" />
+  
+  <s:Button id="loginbtn" label="Login" click="loginService.send();" />
+  
+  <fx:Script>
+    <![CDATA[
+      import com.adobe.serialization.json.JSON;
+      import com.model.ModelLocator;
+      
+      import mx.controls.Alert;
+      import mx.events.CloseEvent;
+      import mx.managers.PopUpManager;
+      import mx.rpc.events.ResultEvent;
+      
+      [Bindable]
+      private var mod:ModelLocator = ModelLocator.getInstance();
+      
+      private function init() : void {
+        PopUpManager.centerPopUp(this);
+        username.setFocus();
+      }
+      
+      private function closeWin(e:Event) : void {
+        PopUpManager.removePopUp(this);
+      }
+      
+      private function keyHandler(e:KeyboardEvent):  void {
+        if(e.keyCode == 13)
+          loginService.send();
+      }
+      
+      private function getLoginResult(event:ResultEvent) : void {
+        var success:Boolean = JSON.decode(event.result.toString()).success;
+        if (success) {
+          dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
+        } else {
+          Alert.show("Invalid Username and Password", "Error");
+        }
+      }
+      
+    ]]>
+  </fx:Script>
+  
+</s:TitleWindow>

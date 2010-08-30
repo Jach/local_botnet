@@ -1,4 +1,4 @@
-from flask import Module
+from flask import Module, jsonify
 from flask import request, session, g, redirect, url_for, abort, render_template
 
 admin = Module(__name__, url_prefix='')
@@ -13,9 +13,12 @@ def index():
 
 @admin.route('/login/', methods=['POST'])
 def login():
-  pass
+  return jsonify({'success': True})
 
 @admin.route('/logout/', methods=['POST'])
 def logout():
   pass
 
+@admin.route('/bots/get_bots/', methods=['GET'])
+def get_bots():
+  pass

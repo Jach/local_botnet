@@ -9,5 +9,6 @@ insert into admins (name, password) values ('admin', '');
 drop table if exists bots;
 create table bots (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  ip STRING NOT NULL
+  ip STRING NOT NULL,
+  alias STRING DEFAULT NULL
 );
