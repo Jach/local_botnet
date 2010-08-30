@@ -3,7 +3,7 @@
   <!-- Change this to your SDK location. -->
   <property name="FLEX_HOME" value="/home/kevin/Desktop/flex_sdk_4" />
 
-  <property name="LIBS" value="${basedir}/com/,${FLEX_HOME}/frameworks/libs/,${FLEX_HOME}/frameworks/projects/framework/bundles/en_US/,${FLEX_HOME}/frameworks/locale/en_US/" />
+  <property name="LIBS" value="${basedir}/com/,${basedir}/libs/,${FLEX_HOME}/frameworks/libs/,${FLEX_HOME}/frameworks/projects/framework/bundles/en_US/,${FLEX_HOME}/frameworks/locale/en_US/" />
   <property name="THEMES" value="${FLEX_HOME}/frameworks/themes/Halo/halo.swc,${FLEX_HOME}/frameworks/themes/Spark/spark.css" />
   <property name="DEBUG" value="true" />
 
