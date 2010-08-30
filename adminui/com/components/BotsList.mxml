@@ -5,7 +5,7 @@
            creationComplete="init();"
            >
   <fx:Declarations>
-    <s:HTTPService id="getBots" url="{mod.base_url}/get_bots/" method="GET" resultFormat="text"
+    <s:HTTPService id="getBots" url="{mod.base_url}/bots/get_bots/" method="GET" resultFormat="text"
                    result="getBotsResult(event);"
                    fault="mod.serviceFault(event);"
                    showBusyCursor="true"

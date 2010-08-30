@@ -4,7 +4,6 @@ create table admins (
   name STRING NOT NULL,
   password CHAR(40) NOT NULL
 );
-insert into admins (name, password) values ('admin', '');
 
 drop table if exists bots;
 create table bots (

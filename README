@@ -39,6 +39,9 @@ be setup. If you wish to deploy using a different server such as Apache,
 see the documentation here: http://flask.pocoo.org/docs/deploying/
 I recommend mod_wsgi or FastCGI.
 
+Note that you will need to turn the DEBUG flag to False in the config.py
+file for deployment, and the default server won't be exposed otherwise.
+
 On the client machine:
 
 As root, you'll need to copy the files in client_scripts/ to a secure location

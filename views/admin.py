@@ -13,12 +13,11 @@ def index():
 
 @admin.route('/login/', methods=['POST'])
 def login():
-  return jsonify({'success': True})
-
-@admin.route('/logout/', methods=['POST'])
-def logout():
-  pass
+  user = g.query_db('select id from admins where name = ? and password = ?',
+      (request.form['username'], g.sha1(request.form['password'])), True)
+  suc = user is not None
+  return jsonify({'success': suc})
 
 @admin.route('/bots/get_bots/', methods=['GET'])
 def get_bots():
-  pass
+  return jsonify({'bots': []})
