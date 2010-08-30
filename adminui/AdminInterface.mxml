@@ -5,27 +5,56 @@
                width="100%"
                height="100%"
                creationComplete="init();" xmlns:components="com.components.*"
+               skinClass="com.skins.AppBackgroundSkin"
                >
-
-  <fx:Declarations>
-    <!--<s:HTTPService id="getEmployeesService" url="http://localhost:8888/flex4ch08/getEmployees.php" 
-					   method="GET" resultFormat="e4x" 
-					   result="getEmployeesResult(event)" fault="serviceFault(event)" />
-    -->
-  </fx:Declarations>
   
+  <fx:Declarations>
+    <s:Skin id="appskin" xmlns:fx="http://ns.adobe.com/mxml/2009">
+      <s:Rect id="backgroundRect" left="0" right="0" top="0" bottom="0"><s:fill>
+        <s:LinearGradient><s:entries><s:GradientEntry color="0x0000ff" ratio="0.00" alpha="0.5" />
+        <s:GradientEntry color="0xcccccc" ratio="0.5" alpha="0.5" /></s:entries>
+        </s:LinearGradient></s:fill></s:Rect>
+      <s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" />
+    </s:Skin>
+    <s:HTTPService id="getCommands" url="{mod.base_url}/bots/commands/" method="GET"
+                   resultFormat="text" showBusyCursor="true"
+                   result="getCommandsResult(event);" fault="mod.serviceFault(event);" />
+    <s:HTTPService id="sendCommand" url="{mod.base_url}/bots/commands/send/" method="POST"
+                   resultFormat="text" showBusyCursor="true"
+                   result="Alert.show('Command Sent', 'Success');" fault="mod.serviceFault(event);">
+      <s:request><command_id></command_id><users></users></s:request>
+    </s:HTTPService>
+  </fx:Declarations>
+  <s:layout><s:VerticalLayout /></s:layout>
+  
+  <s:DropDownList dataProvider="{commands_list}" id="commands" minWidth="250"
+              labelField="name" prompt="Select Command" selectedIndex="-1" close="selectCommand();" />
 
   <components:BotsList id="botsList" />
 
   <fx:Script>
     <![CDATA[
+      import com.adobe.serialization.json.JSON;
+      import com.model.ModelLocator;
       import com.popups.Login;
+      import com.skins.AppBackgroundSkin;
       
+      import mx.collections.ArrayList;
       import mx.controls.Alert;
       import mx.events.CloseEvent;
       import mx.managers.PopUpManager;
       import mx.rpc.events.FaultEvent;
+      import mx.rpc.events.ResultEvent;
 
+      [Embed("/icons/confirm.png")]
+      private var confirm_icon:Class;
+      
+      [Bindable]
+      private var mod:ModelLocator = ModelLocator.getInstance();
+      
+      [Bindable]
+      private var commands_list:ArrayList;
+      
       public function init() : void {
 
         var loginWindow:Login = Login(PopUpManager.createPopUp(this, Login, true));
@@ -34,7 +63,35 @@
         loginWindow.addEventListener(CloseEvent.CLOSE,
           function() : void {
             botsList.getBots.send();
+            getCommands.send();
           });
+      }
+      
+      private function getCommandsResult(event:ResultEvent) : void {
+        var r:Object = JSON.decode(event.result.toString());
+        commands_list = new ArrayList(r.commands);
+      }
+      
+      private function selectCommand() : void {
+        var id:Number = commands.selectedItem.id;
+        var name:String = commands.selectedItem.name;
+        if (name == 'Lock Screen') {
+          confirm_prompt("Are you sure you wish to lock the screen for the selected bots below?",
+            function() : void {
+              sendCommand.send({'command_id' : id, 'users': '1'});
+            });
+        } else if (1 == 0) {
+          
+        }
+      }
+      
+      public function confirm_prompt(warn_msg:String, func:Function) : void {
+        Alert.show(warn_msg, "Confirmation", Alert.YES|Alert.NO,
+          this, function(event:CloseEvent) : void {
+            if (event.detail == Alert.YES) {
+              func();
+            }
+          }, confirm_icon, Alert.YES);
       }
 
     ]]>

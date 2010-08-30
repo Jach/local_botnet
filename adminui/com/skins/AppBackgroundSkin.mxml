@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark" 
+        xmlns:mx="library://ns.adobe.com/flex/mx">
+  <fx:Metadata>
+    [HostComponent("spark.components.Application")]
+  </fx:Metadata> 
+  
+  <s:states>
+    <s:State name="normal" />
+    <s:State name="disabled" />
+  </s:states>
+  
+  <!-- Define a gradient fill for the background of the Application container. -->    
+  <s:Rect id="backgroundRect" left="0" right="0" top="0" bottom="0">
+    <s:fill>
+      <s:LinearGradient rotation="90.0">
+        <s:entries>
+          <s:GradientEntry color="0xaec5e7" ratio="0.25" alpha="0.8" />
+          <s:GradientEntry color="0x5e8ed7" ratio="0.5" alpha="0.5" />
+          <!--<s:GradientEntry color="0x008000" ratio="0.1" alpha="0.4" />
+          <s:GradientEntry color="0x11bb55" ratio="0.5" alpha="0.5" />-->
+        </s:entries>
+      </s:LinearGradient>
+    </s:fill>
+  </s:Rect>
+  
+  <s:Group id="contentGroup" left="10" right="10" top="10" bottom="10" />
+
+</s:Skin>
